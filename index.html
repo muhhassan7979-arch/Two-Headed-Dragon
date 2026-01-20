@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Verification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  background: white;
+  padding: 25px;
+  width: 320px;
+  border-radius: 10px;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+button {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#error {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h3>Verification</h3>
+
+  <input id="name" placeholder="Enter your name">
+  <input id="age" placeholder="Enter your age">
+  <input id="school" placeholder="Enter school name">
+  <input id="grade" placeholder="Enter grade">
+
+  <button onclick="check()">Continue</button>
+
+  <div id="error"></div>
+</div>
+
+<script>
+function check() {
+  const name = document.getElementById("name").value.toLowerCase().trim();
+  const grade = document.getElementById("grade").value.trim();
+  const error = document.getElementById("error");
+
+  const blockedNames = [
+    "arfa",
+    "arfa naveed",
+    "arfa naveed khan"
+  ];
+
+  if (grade === "7" && blockedNames.includes(name)) {
+    error.innerText = "Access denied. You are not allowed to submit feedback.";
+    return;
+  }
+
+  // Allowed → go to feedback page
+  window.location.href = "feedback.html";
+}
+</script>
+
+</body>
+</html>
