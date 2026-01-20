@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Election Feedback</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#f9fafb;
+  display:flex;
+  justify-content:center;
+  padding:40px 0;
+}
+.container {
+  background:white;
+  width:450px;
+  max-width:90%;
+  border-radius:15px;
+  padding:30px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  animation:fadeIn 0.8s ease;
+}
+.logo {
+  width:120px;
+  display:block;
+  margin:0 auto 20px;
+  border-radius:50%;
+}
+h2 {
+  text-align:center;
+  color:#333;
+  margin-bottom:20px;
+}
+input, textarea, button {
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  font-size:15px;
+  transition:0.3s ease;
+}
+input:focus, textarea:focus {
+  outline:none;
+  border-color:#4a90e2;
+  box-shadow:0 0 6px rgba(74,144,226,0.3);
+}
+button {
+  width:100%;
+  padding:14px;
+  background:#4a90e2;
+  color:white;
+  font-weight:600;
+  margin-top:20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s ease;
+}
+button:hover {
+  background:#3f7fc5;
+}
+button.secondary {
+  background:#e2e2e2;
+  color:#333;
+}
+button.secondary:hover {
+  background:#d0d0d0;
+}
+.hidden { display:none; }
+.feedback-buttons button { margin-top:10px; }
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(-10px);}
+  to {opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="formPage">
+
+  <!-- Replace this src with your real logo -->
+  <img src="https://via.placeholder.com/120.png?text=Your+Logo" class="logo" alt="Logo">
+
+  <h2>Verification</h2>
+  <input id="fullName" placeholder="Enter your full name">
+  <input id="age" type="number" placeholder="Enter your age">
+  <input id="school" placeholder="Enter your school name">
+  <input id="grade" placeholder="Enter your grade">
+
+  <button onclick="verifyForm()">Continue</button>
+  <div id="error" style="color:red; margin-top:10px;"></div>
+
+  <!-- Feedback Section -->
+  <div class="hidden" id="feedbackSection">
+    <h2>Feedback</h2>
+    <textarea id="improve" placeholder="How can we improve our election campaign?"></textarea>
+    <textarea id="complaint" placeholder="Any complaint or suggestion?"></textarea>
+    <button onclick="submitFeedback()">Submit Feedback</button>
+
+    <div class="feedback-buttons">
+      <button onclick="window.open('https://www.instagram.com/twoheaded_dragon26','_blank')">Visit Instagram</button>
+      <button class="secondary" onclick="window.alert('Campaign Sponsor Page coming soon!')">Get Campaign Sponsor</button>
+      <button class="secondary" onclick="closeWindow()">Close Page</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function verifyForm() {
+  const name = document.getElementById('fullName').value.trim().toLowerCase();
+  const age = parseInt(document.getElementById('age').value);
+  const grade = document.getElementById('grade').value.trim();
+  const school = document.getElementById('school').value.trim();
+  const error = document.getElementById('error');
+
+  const blockedNames = ["arfa","arfa naveed","arfa naveed khan"];
+
+  if(!name || !age || !grade || !school) {
+    error.innerText = "Please fill all fields.";
+    return;
+  }
+
+  if(age < 10) {
+    error.innerText = "Age must be 10 or above.";
+    return;
+  }
+
+  if(grade==="7" && blockedNames.includes(name)) {
+    error.innerText = "Access denied. You are not allowed to submit feedback.";
+    return;
+  }
+
+  error.innerText = "";
+  document.getElementById('feedbackSection').classList.remove('hidden');
+  window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+}
+
+function submitFeedback() {
+  alert("Thank you for your feedback!");
+}
+
+function closeWindow() {
+  alert("You closed the page.");
+  window.close();
+}
+</script>
+
+</body>
+</html>
